@@ -10,6 +10,9 @@
     font-size: 0.7em;
     font-family: "Montserrat", sans-serif;
     opacity: 0.8;
+    &.error {
+      color: #e74c3c;
+    }
   }
   input {
     &.error {

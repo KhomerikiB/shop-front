@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Nav from "./components/layout/nav/Nav";
 import MainWrapper from "./components/layout/mainBlock/main";
 import Items from "./components/organisms/items/Items";
 import Header from "./components/layout/header/Header";
 import Login from "./components/organisms/login";
 import Register from "./components/organisms/register";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  withRouter
-} from "react-router-dom";
+import ItemInner from "./components/organisms/items/itemInner";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import axiosInterceptor from "./config/axiosInterceptor";
 import { checkRefreshToken } from "./redux/actions/authAction";
+import { getAllCart } from "./redux/actions/cartAction";
 class App extends React.Component {
   componentDidMount() {
     this.isAuth();
@@ -21,7 +18,11 @@ class App extends React.Component {
   isAuth = async () => {
     await this.props.checkRefreshToken();
     axiosInterceptor();
+    if (this.props.auth.isAuthenticated) this.getCarts();
     // if (this.props.token) axiosInterceptor(this.props.token);
+  };
+  getCarts = async () => {
+    await this.props.getAllCart();
   };
   render() {
     return (
@@ -41,6 +42,8 @@ class App extends React.Component {
             />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/item/:id" component={Header} />
+            <Route path="/item/:id" component={ItemInner} />
           </Router>
         </div>
       </div>
@@ -48,6 +51,6 @@ class App extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  token: state.auth.token
+  auth: state.auth
 });
-export default connect(mapStateToProps, { checkRefreshToken })(App);
+export default connect(mapStateToProps, { checkRefreshToken, getAllCart })(App);

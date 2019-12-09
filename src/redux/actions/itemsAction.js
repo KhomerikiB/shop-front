@@ -13,3 +13,17 @@ export const getItems = () => {
     }
   };
 };
+
+export const getItemById = id => {
+  return async dispatch => {
+    try {
+      const result = await apiCalls.getItemById(id);
+      dispatch({
+        type: types.GET_ITEM_BY_ID,
+        payload: result.data.data
+      });
+    } catch (error) {
+      throw error.response;
+    }
+  };
+};

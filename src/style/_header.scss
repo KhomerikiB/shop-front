@@ -1,6 +1,6 @@
 .header {
   height: 10rem;
-  padding: 0 5rem;
+  padding: 0 5%;
   position: relative;
   &::after {
     content: "";
@@ -13,8 +13,11 @@
   }
   .main {
     cursor: pointer;
-    font-size: 0.9em;
-    cursor: pointer;
+
+    a {
+      font-size: 0.9em;
+      color: $black;
+    }
     &:hover {
       svg {
         transform: translateX(-1rem);

@@ -1,6 +1,7 @@
 import * as types from "../types";
 const initialState = {
-  allItems: []
+  allItems: [],
+  item: {}
 };
 const itemsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -8,6 +9,11 @@ const itemsReducer = (state = initialState, action) => {
       return {
         ...state,
         allItems: action.payload
+      };
+    case types.GET_ITEM_BY_ID:
+      return {
+        ...state,
+        item: action.payload
       };
     default:
       return state;

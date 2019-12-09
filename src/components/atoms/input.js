@@ -6,7 +6,7 @@ const Input = props => {
   return (
     <div className="input-box">
       {label && (
-        <label className="label" htmlFor={name}>
+        <label className={`label ${className}`} htmlFor={name}>
           {label}
         </label>
       )}
@@ -16,7 +16,6 @@ const Input = props => {
         id={name}
         placeholder={placeholder}
         onChange={onChange}
-        className={className}
         value={value}
       />
     </div>

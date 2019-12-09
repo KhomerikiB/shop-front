@@ -13,9 +13,11 @@ const Header = props => {
   };
   return (
     <div className="header flex-space">
-      <div className="main flex-center">
-        <IoIosArrowRoundBack size="27" />
-        Back to Shop
+      <div className="main">
+        <Link to="/" className="flex-center">
+          <IoIosArrowRoundBack size="27" />
+          Back to Shop
+        </Link>
       </div>
       <div className="flex-space">
         <div className="search-box">

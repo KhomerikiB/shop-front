@@ -7,13 +7,44 @@ class Register extends React.Component {
     name: "",
     email: "",
     password: "",
-    passwordConfirm: ""
+    passwordConfirm: "",
+    errors: {
+      name: false,
+      email: false,
+      password: false,
+      passwordConfirm: false
+    }
   };
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
   handleSubmit = e => {
-    console.log(e);
+    if (this.isFormValid(this.state)) {
+      console.log("send data ");
+    }
+  };
+
+  isFormValid = ({ name, email, password, passwordConfirm }) => {
+    const errors = {};
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (name.length <= 2) {
+      errors.name = true;
+    } else if (!emailRegex.test(email)) {
+      errors.email = true;
+    } else if (password.length <= 5) {
+      errors.password = true;
+    } else if (password !== passwordConfirm) {
+      errors.passwordConfirm = true;
+    }
+    const checkErrors = Object.keys(errors).map(key => {
+      if (errors[key]) return key;
+    });
+
+    if (checkErrors.length > 0) {
+      console.log(errors);
+    } else {
+      return true;
+    }
   };
   render() {
     const { email, password, name, passwordConfirm } = this.state;
