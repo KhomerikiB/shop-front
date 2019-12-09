@@ -1,0 +1,30 @@
+.nav {
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: $light-gray;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  &__header {
+    font-family: "Roboto Condensed", sans-serif;
+    .title {
+      font-weight: bold;
+      font-size: 1.3em;
+    }
+    .sub-title {
+      font-size: 0.8em;
+    }
+  }
+  .ul {
+    margin-top: 50px;
+    font-family: "Oswald", sans-serif;
+    font-weight: 400;
+    li {
+      font-size: 1em;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
+  }
+}
