@@ -26,9 +26,11 @@ const Header = props => {
         </div>
         {props.auth.isAuthenticated ? (
           <>
-            <div className="account flex-center">
-              Cart
-              <FiShoppingCart size="17" style={{ marginLeft: "1rem" }} />
+            <div className="account">
+              <Link to="/cart" className="flex-center">
+                Cart
+                <FiShoppingCart size="17" style={{ marginLeft: "1rem" }} />
+              </Link>
             </div>
             <div className="account underline flex-center" onClick={logOut}>
               Logout

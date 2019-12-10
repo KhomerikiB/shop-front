@@ -39,3 +39,6 @@ export const addCartItem = id => {
 export const getCartItems = () => {
   return axios.get(`${cartBaseURL}`);
 };
+export const removeItemFromCart = id => {
+  return axios.put(`${cartBaseURL}`, { id });
+};

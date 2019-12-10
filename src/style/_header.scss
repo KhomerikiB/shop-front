@@ -71,11 +71,16 @@
     &.underline {
       text-decoration: underline;
     }
+
     &:hover {
+      a {
+        color: $main-blue;
+      }
       color: $main-blue;
     }
     cursor: pointer;
     a {
+      transition: all 0.3s ease;
       color: $black;
     }
   }

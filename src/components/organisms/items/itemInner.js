@@ -38,7 +38,15 @@ class ItemInner extends React.Component {
     }
   };
   render() {
-    const { images, brand, type, description, price, _id } = this.props.item;
+    const {
+      images,
+      brand,
+      type,
+      description,
+      price,
+      _id,
+      title
+    } = this.props.item;
     const { href } = this.state;
     return (
       <div className="inner-item">
@@ -62,8 +70,9 @@ class ItemInner extends React.Component {
           </div>
           <div className="description-wrapper">
             <div className="price">{price}$</div>
+            <p class="title">{title}</p>
             <div className="brand-type">
-              <span className="brand">{brand} _ </span>
+              {/* <span className="brand">{brand} _ </span> */}
               <span className="type">{type}</span>
             </div>
 
@@ -79,7 +88,7 @@ class ItemInner extends React.Component {
                 />
               ) : (
                 <div
-                  class="flex-center"
+                  className="flex-center"
                   style={{ height: "100%" }}
                   onClick={() => this.addItemToCart(_id)}
                 >

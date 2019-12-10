@@ -3,3 +3,4 @@ export const RESET_USER_DATA = "RESET_USER_DATA";
 export const GET_ALL_ITEMS = "GET_ALL_ITEMS";
 export const GET_ITEM_BY_ID = "GET_ITEM_BY_ID";
 export const GET_ALL_CARTS = "GET_ALL_CARTS";
+export const REMOVE_UPDATE_CART_ITEM = "REMOVE_UPDATE_CART_ITEM";

@@ -6,6 +6,7 @@ import Header from "./components/layout/header/Header";
 import Login from "./components/organisms/login";
 import Register from "./components/organisms/register";
 import ItemInner from "./components/organisms/items/itemInner";
+import CartDetails from "./components/organisms/cart/cartDetails";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import axiosInterceptor from "./config/axiosInterceptor";
@@ -42,8 +43,9 @@ class App extends React.Component {
             />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
-            <Route path="/item/:id" component={Header} />
+            <Route path={["/item/:id", "/cart"]} component={Header} />
             <Route path="/item/:id" component={ItemInner} />
+            <Route path="/cart" component={CartDetails} />
           </Router>
         </div>
       </div>

@@ -1,5 +1,20 @@
 .title {
+  font-size: 1.4em;
+  opacity: 0.8;
+  font-weight: bold;
 }
 .top-wrapper {
   padding-top: 10rem;
+}
+.main-container {
+  max-width: 155rem;
+  padding: 5rem;
+  padding-top: 10rem;
+  margin: 0 auto;
+}
+.small-text {
+  color: #777;
+  opacity: 0.7;
+  font-size: 0.7em;
+  font-weight: 600;
 }
