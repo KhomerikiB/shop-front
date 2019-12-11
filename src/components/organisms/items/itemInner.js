@@ -38,15 +38,7 @@ class ItemInner extends React.Component {
     }
   };
   render() {
-    const {
-      images,
-      brand,
-      type,
-      description,
-      price,
-      _id,
-      title
-    } = this.props.item;
+    const { images, type, description, price, _id, title } = this.props.item;
     const { href } = this.state;
     return (
       <div className="inner-item">

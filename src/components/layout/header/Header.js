@@ -5,7 +5,6 @@ import { FiLogOut, FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logOutUser } from "../../../redux/actions/authAction";
-import { withRouter } from "react-router-dom";
 const Header = props => {
   const logOut = () => {
     props.logOutUser();
@@ -49,4 +48,4 @@ const Header = props => {
 const mapStateToProps = state => ({
   auth: state.auth
 });
-export default withRouter(connect(mapStateToProps, { logOutUser })(Header));
+export default connect(mapStateToProps, { logOutUser })(Header);

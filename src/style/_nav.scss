@@ -8,23 +8,36 @@
   left: 0;
   width: 300px;
   &__header {
-    font-family: "Roboto Condensed", sans-serif;
     .title {
+      opacity: 1;
       font-weight: bold;
       font-size: 1.3em;
+      font-family: "Roboto Condensed", sans-serif;
     }
     .sub-title {
       font-size: 0.8em;
     }
   }
-  .ul {
+  .category-title {
+    font-size: 1.2em;
+    margin: 0;
     margin-top: 50px;
-    font-family: "Oswald", sans-serif;
+    margin-bottom: 20px;
+  }
+  .ul {
+    // font-family: "Oswald", sans-serif;
     font-weight: 400;
     li {
       font-size: 1em;
       margin-top: 1rem;
       cursor: pointer;
+      a {
+        color: $black;
+        transition: all 0.3s ease;
+        &:hover {
+          color: $main-blue;
+        }
+      }
     }
   }
 }

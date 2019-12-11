@@ -2,6 +2,7 @@ import axios from "axios";
 const baseAuthURL = "http://localhost:4000/api/auth";
 const itemsBaseURL = "http://localhost:4000/api/item";
 const cartBaseURL = "http://localhost:4000/api/cart";
+const categoryBaseURL = "http://localhost:4000/api/category";
 export const login = user => {
   return axios.post(`${baseAuthURL}/login`, user, {
     //AxiosRequestConfig parameter
@@ -41,4 +42,10 @@ export const getCartItems = () => {
 };
 export const removeItemFromCart = id => {
   return axios.put(`${cartBaseURL}`, { id });
+};
+export const getCategoryItems = () => {
+  return axios.get(`${categoryBaseURL}`);
+};
+export const getItemsByCategory = id => {
+  return axios.get(`${itemsBaseURL}/categoryId/${id}`);
 };

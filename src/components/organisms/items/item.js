@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FaCartPlus } from "react-icons/fa";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { addItemToCart } from "../../../redux/actions/cartAction";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -51,7 +50,7 @@ const Item = props => {
         className="product-item__desc"
         onClick={() => getDetailInfo(props.data._id)}
       >
-        <p className="type">{props.data.type}</p>
+        <p className="type">{props.data.brand}</p>
         <div className="flex-space">
           <p className="description">{props.data.description}</p>
           <p className="price">
@@ -63,4 +62,4 @@ const Item = props => {
     </div>
   );
 };
-export default connect(null, { addItemToCart })(withRouter(Item));
+export default connect(null, { addItemToCart })(Item);

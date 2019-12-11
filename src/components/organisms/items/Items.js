@@ -1,24 +1,22 @@
-import React from "react";
-import Item from "./item";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getItems } from "../../../redux/actions/itemsAction";
-class Items extends React.Component {
-  componentDidMount() {
-    this.props.getItems();
-  }
-  render() {
-    return (
-      <div className="items-wrapper">
-        <div className="grid">
-          {this.props.items.allItems.map(item => (
-            <Item data={item} key={item._id} />
-          ))}
-        </div>
-      </div>
-    );
-  }
-}
+
+const Items = props => {
+  useEffect(() => {
+    console.log("241", props);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return <div>items</div>;
+};
+
 const mapStateToProps = state => ({
   items: state.items
 });
-export default connect(mapStateToProps, { getItems })(Items);
+
+const mapDispatchToProps = dispatch => ({
+  getItemsByCategory(id) {
+    dispatch.getItemsByCategory(id);
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Items);

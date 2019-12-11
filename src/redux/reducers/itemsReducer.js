@@ -1,6 +1,7 @@
 import * as types from "../types";
 const initialState = {
   allItems: [],
+  filteredArray: [],
   item: {}
 };
 const itemsReducer = (state = initialState, action) => {
@@ -14,6 +15,11 @@ const itemsReducer = (state = initialState, action) => {
       return {
         ...state,
         item: action.payload
+      };
+    case types.GET_ITEMS_BY_CATEGORY:
+      return {
+        ...state,
+        filteredArray: action.payload
       };
     default:
       return state;

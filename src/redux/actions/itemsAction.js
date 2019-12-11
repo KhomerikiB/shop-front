@@ -27,3 +27,16 @@ export const getItemById = id => {
     }
   };
 };
+export const getItemsByCategory = id => {
+  return async dispatch => {
+    try {
+      const result = await apiCalls.getItemsByCategory(id);
+      dispatch({
+        type: types.GET_ITEMS_BY_CATEGORY,
+        payload: result.data.data
+      });
+    } catch (error) {
+      throw error.response;
+    }
+  };
+};
