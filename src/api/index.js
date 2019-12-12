@@ -49,3 +49,6 @@ export const getCategoryItems = () => {
 export const getItemsByCategory = id => {
   return axios.get(`${itemsBaseURL}/categoryId/${id}`);
 };
+export const registerUser = data => {
+  return axios.post(`${baseAuthURL}/register`, data);
+};

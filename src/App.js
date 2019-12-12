@@ -12,9 +12,9 @@ import { connect } from "react-redux";
 import axiosInterceptor from "./config/axiosInterceptor";
 import { checkRefreshToken } from "./redux/actions/authAction";
 import { getAllCart } from "./redux/actions/cartAction";
+import { removeFilteredItems } from "./redux/actions/itemsAction";
 class App extends React.Component {
   componentDidMount() {
-    console.log("props", { ...this.props });
     this.isAuth();
   }
   isAuth = async () => {
@@ -30,17 +30,18 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="main-wrapper">
-          <Route path="/" exact component={Nav} />
+          <Route path={["/", "/category/:id"]} exact component={Nav} />
           <Route
-            path="/"
+            path={["/", "/category/:id"]}
             exact
-            component={() => (
+            render={props => (
               <MainWrapper>
-                <Header />
-                <Items />
+                <Header {...props} />
+                <Items {...props} />
               </MainWrapper>
             )}
           />
+          {/* <Route path="/" exact component={Items} /> */}
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path={["/item/:id", "/cart"]} component={Header} />
@@ -54,6 +55,8 @@ class App extends React.Component {
 const mapStateToProps = state => ({
   auth: state.auth
 });
-export default connect(mapStateToProps, { checkRefreshToken, getAllCart })(
-  withRouter(App)
-);
+export default connect(mapStateToProps, {
+  checkRefreshToken,
+  getAllCart,
+  removeFilteredItems
+})(withRouter(App));

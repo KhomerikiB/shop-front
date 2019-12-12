@@ -16,10 +16,13 @@
   .items-wrapper {
     margin: 5rem 0;
     .item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      // display: flex;
+      // align-items: center;
+      // justify-content: space-between;
+      display: grid;
+      grid-template-columns: 250px 4fr 2fr 1fr auto;
       padding: 4rem 0;
+      align-items: center;
       //   max-width: 90rem;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       .imagebox {

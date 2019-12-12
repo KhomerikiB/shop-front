@@ -1,4 +1,4 @@
-import React, { usetState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { FiPlus } from "react-icons/fi";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -11,7 +11,7 @@ const Nav = props => {
   const renderCategories = () => {
     return props.categories.categories
       ? props.categories.categories.map(category => (
-          <li>
+          <li key={category._id}>
             <Link to={`/category/${category._id}`} className="flex-space">
               <span>{category.name}</span>
               <FiPlus />
@@ -23,7 +23,9 @@ const Nav = props => {
   return (
     <div className="nav top-wrapper">
       <div className="nav__header">
-        <p className="title blue-text">ECOM STORE</p>
+        <Link to="/" className="title blue-text">
+          ECOM STORE
+        </Link>
         <p className="sub-title">Discover future</p>
       </div>
       <p className="title category-title">Categories</p>

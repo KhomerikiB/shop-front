@@ -62,7 +62,7 @@ class ItemInner extends React.Component {
           </div>
           <div className="description-wrapper">
             <div className="price">{price}$</div>
-            <p class="title">{title}</p>
+            <p className="title">{title}</p>
             <div className="brand-type">
               {/* <span className="brand">{brand} _ </span> */}
               <span className="type">{type}</span>

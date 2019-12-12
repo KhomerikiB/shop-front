@@ -7,7 +7,13 @@ import Loader from "react-loader-spinner";
 const Item = props => {
   const [loader, setLoader] = useState(false);
   const getDetailInfo = id => {
-    props.history.push(`/item/${id}`);
+    // props.props.history.push(`/item/${id}`);
+    props.props.history.push({
+      pathname: `/item/${id}`,
+      state: {
+        history: { path: props.props.location.pathname }
+      }
+    });
   };
   const addItemToCart = async id => {
     setLoader(true);
@@ -16,7 +22,7 @@ const Item = props => {
       setLoader(false);
     } catch (error) {
       if (error.status === 400) {
-        props.history.push("/login");
+        props.props.history.push("/login");
       }
     }
   };

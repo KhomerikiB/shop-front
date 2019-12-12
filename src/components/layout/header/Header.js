@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { FiLogOut, FiShoppingCart } from "react-icons/fi";
@@ -6,6 +6,12 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logOutUser } from "../../../redux/actions/authAction";
 const Header = props => {
+  const [backPath, setBackPath] = useState("/");
+  useEffect(() => {
+    if (typeof props.location.state !== "undefined") {
+      setBackPath(props.location.state.history.path);
+    }
+  }, [props.location.state]);
   const logOut = () => {
     props.logOutUser();
     props.history.push("/");
@@ -13,7 +19,7 @@ const Header = props => {
   return (
     <div className="header flex-space">
       <div className="main">
-        <Link to="/" className="flex-center">
+        <Link to={backPath} className="flex-center">
           <IoIosArrowRoundBack size="27" />
           Back to Shop
         </Link>

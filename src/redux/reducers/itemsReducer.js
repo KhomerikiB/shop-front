@@ -16,6 +16,11 @@ const itemsReducer = (state = initialState, action) => {
         ...state,
         item: action.payload
       };
+    case types.REMOVE_FILTERED_ITEMS:
+      return {
+        ...state,
+        filteredArray: []
+      };
     case types.GET_ITEMS_BY_CATEGORY:
       return {
         ...state,

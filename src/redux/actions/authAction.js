@@ -1,5 +1,16 @@
 import * as apiCalls from "../../api";
 import * as types from "../types";
+
+export const registerUser = data => {
+  return async dispatch => {
+    try {
+      await apiCalls.registerUser(data);
+    } catch (error) {
+      throw error.response;
+    }
+  };
+};
+
 export const login = user => {
   return async dispatch => {
     try {

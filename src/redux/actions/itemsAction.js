@@ -40,3 +40,6 @@ export const getItemsByCategory = id => {
     }
   };
 };
+export const removeFilteredItems = () => {
+  return { type: types.REMOVE_FILTERED_ITEMS };
+};
