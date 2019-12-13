@@ -74,9 +74,6 @@ class Register extends React.Component {
     const { email, password, name, passwordConfirm, errors } = this.state;
     return (
       <div className="login-container flex-center">
-        <div className="home-link">
-          <Link to="/">Home</Link>
-        </div>
         <div className="login">
           <p className="title">
             Register to <strong>ECOM STORE</strong>

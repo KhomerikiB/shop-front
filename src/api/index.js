@@ -52,3 +52,6 @@ export const getItemsByCategory = id => {
 export const registerUser = data => {
   return axios.post(`${baseAuthURL}/register`, data);
 };
+export const getSearchedItems = data => {
+  return axios.get(`${itemsBaseURL}/search/${data.value}`, { type: data.type });
+};

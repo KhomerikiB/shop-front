@@ -30,13 +30,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="main-wrapper">
+          <Route path={"/"} component={Header} />
           <Route path={["/", "/category/:id"]} exact component={Nav} />
           <Route
             path={["/", "/category/:id"]}
             exact
             render={props => (
               <MainWrapper>
-                <Header {...props} />
                 <Items {...props} />
               </MainWrapper>
             )}
@@ -44,7 +44,6 @@ class App extends React.Component {
           {/* <Route path="/" exact component={Items} /> */}
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path={["/item/:id", "/cart"]} component={Header} />
           <Route path="/item/:id" component={ItemInner} />
           <Route path="/cart" component={CartDetails} />
         </div>
