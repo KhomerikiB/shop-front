@@ -3,7 +3,20 @@ import { FiPlus } from "react-icons/fi";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllCategory } from "../../../redux/actions/categoryAction";
+import Filter from "../../molecules/filter";
 const Nav = props => {
+  const data = [
+    {
+      id: 1,
+      value: "100-300",
+      name: "price"
+    },
+    {
+      id: 2,
+      value: "300-500",
+      name: "price"
+    }
+  ];
   useEffect(() => {
     props.getAllCategory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -20,6 +33,9 @@ const Nav = props => {
         ))
       : "";
   };
+  const onChange = e => {
+    console.log(e.target.value);
+  };
   return (
     <div className="nav top-wrapper">
       <div className="nav__header">
@@ -30,6 +46,12 @@ const Nav = props => {
       </div>
       <p className="title category-title">Categories</p>
       <ul className="ul">{renderCategories()}</ul>
+      <Filter
+        onChange={onChange}
+        className="price"
+        title="price"
+        items={data}
+      />
     </div>
   );
 };

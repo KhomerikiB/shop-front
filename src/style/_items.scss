@@ -92,6 +92,11 @@
   display: flex;
   justify-content: space-between;
   min-height: calc(100vh - 10rem);
+  position: relative;
+  .animation-box {
+    position: absolute;
+    z-index: 20;
+  }
   .main-image,
   .description-container {
     width: 50%;
