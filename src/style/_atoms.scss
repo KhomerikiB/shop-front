@@ -8,7 +8,6 @@
   position: relative;
   .label {
     font-size: 0.7em;
-    font-family: "Montserrat", sans-serif;
     opacity: 0.8;
     &.error {
       color: #e74c3c;
@@ -18,7 +17,7 @@
     &.error {
       border-color: #e74c3c;
     }
-    font-family: "Montserrat", sans-serif;
+    font-family: "halveticaNowDisplay", sans-serif;
     height: 100%;
     border: none;
     outline: none;
@@ -34,7 +33,7 @@
 // BUTTON
 .button {
   font-size: 1.2em;
-  font-family: "Montserrat", sans-serif;
+  font-family: "halveticaNowDisplay", sans-serif;
   background-color: $main-blue;
   width: 100%;
   height: 5.4rem;
@@ -44,6 +43,9 @@
   cursor: pointer;
   transition: all 0.3s ease;
   &:hover {
-    background-color: $main-darkblue;
+    // background-color: $main-darkblue;
+    background-color: #fff;
+    color: $black;
+    border: 1px solid $black;
   }
 }

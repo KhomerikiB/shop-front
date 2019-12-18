@@ -3,30 +3,22 @@
   padding: 0 5%;
   background-color: #fff;
   position: relative;
-  &.extra {
-    margin-left: 30rem;
-  }
-  &::after {
-    content: "";
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    height: 1px;
-    position: absolute;
-    background-color: $gray;
-  }
   .main {
-    cursor: pointer;
-
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
     a {
-      font-size: 0.9em;
       color: $black;
     }
-    &:hover {
-      svg {
-        transform: translateX(-1rem);
+    .back-wrapper {
+      cursor: pointer;
+      &:hover {
+        svg {
+          transform: translateX(-1rem);
+        }
       }
     }
+
     svg {
       transition: all 0.3s ease;
       margin-right: 1.2rem;
@@ -62,7 +54,7 @@
       width: 30rem;
       height: 100%;
       padding-right: 30px;
-      font-family: "Montserrat";
+
       font-size: 0.8em;
       color: $black;
       border-bottom: 1px solid $gray;

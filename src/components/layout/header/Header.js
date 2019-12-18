@@ -6,17 +6,17 @@ import { connect } from "react-redux";
 import { logOutUser } from "../../../redux/actions/authAction";
 import { restoreSearchedItems } from "../../../redux/actions/searchAction";
 import Search from "../../molecules/search";
+import DropdownItem from "../../molecules/dropdownMenu";
+import { getAllCategory } from "../../../redux/actions/categoryAction";
+
 const Header = props => {
   const [backPath, setBackPath] = useState("/");
-  const [extraClass, setExtraClass] = useState(false);
   useEffect(() => {
-    const path = props.history.location.pathname;
+    props.getAllCategory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
     props.restoreSearchedItems();
-    if (path === "/" || path.includes("category")) {
-      setExtraClass(true);
-    } else {
-      setExtraClass(false);
-    }
     if (typeof props.location.state !== "undefined") {
       setBackPath(props.location.state.history.path);
     } else {
@@ -29,12 +29,15 @@ const Header = props => {
     props.history.push("/");
   };
   return (
-    <div className={"header flex-space " + (extraClass ? "extra" : "")}>
+    <div className="header flex-space">
       <div className="main">
-        <Link to={backPath} className="flex-center">
-          <IoIosArrowRoundBack size="27" />
-          Back to Shop
-        </Link>
+        <div className="back-wrapper">
+          <Link to={backPath} className="flex-center">
+            <IoIosArrowRoundBack size="27" />
+            Back to Shop
+          </Link>
+        </div>
+        <DropdownItem title="Categories" items={props.categories} />
       </div>
       <div className="flex-space">
         <div className="search-box">
@@ -63,8 +66,11 @@ const Header = props => {
   );
 };
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  categories: state.categories.categories
 });
-export default connect(mapStateToProps, { logOutUser, restoreSearchedItems })(
-  withRouter(Header)
-);
+export default connect(mapStateToProps, {
+  logOutUser,
+  restoreSearchedItems,
+  getAllCategory
+})(withRouter(Header));

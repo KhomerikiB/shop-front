@@ -1,11 +1,8 @@
-import React, { useState } from "react";
-import { FaCartPlus } from "react-icons/fa";
+import React from "react";
 import { connect } from "react-redux";
 import { addItemToCart } from "../../../redux/actions/cartAction";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import Loader from "react-loader-spinner";
 const Item = props => {
-  const [loader, setLoader] = useState(false);
   const getDetailInfo = id => {
     // props.props.history.push(`/item/${id}`);
     props.props.history.push({
@@ -15,37 +12,8 @@ const Item = props => {
       }
     });
   };
-  const addItemToCart = async id => {
-    setLoader(true);
-    try {
-      await props.addItemToCart(id);
-      setLoader(false);
-    } catch (error) {
-      if (error.status === 400) {
-        props.props.history.push("/login");
-      }
-    }
-  };
   return (
     <div className="product-item">
-      {loader ? (
-        <div className="loader-container flex-center">
-          <Loader
-            type="Circles"
-            color="#fff"
-            height={40}
-            width={40}
-            timeout={3000} //3 secs
-          />
-        </div>
-      ) : (
-        <div
-          className="cart-box flex-center"
-          onClick={() => addItemToCart(props.data._id)}
-        >
-          <FaCartPlus color="white" size="25" />
-        </div>
-      )}
       <div
         className="product-item__image"
         onClick={() => getDetailInfo(props.data._id)}

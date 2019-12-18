@@ -1,16 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { getItemById } from "../../../redux/actions/itemsAction";
 import { addItemToCart } from "../../../redux/actions/cartAction";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import { TimelineLite, Power3 } from "gsap";
 
 const ItemInner = props => {
   const [href, setHref] = useState("");
   const [loader, setLoading] = useState(false);
   const [pageLoader, setPageLoader] = useState(true);
+  let imageReveal = useRef(null);
+  let image = useRef(null);
+  let descriptionWrapper = useRef(null);
+  let tl = new TimelineLite();
   const getItem = async id => {
     try {
+      setPageLoader(true);
       await props.getItemById(id);
       // setHref(props.item.images[0].image);
       setPageLoader(false);
@@ -19,12 +25,26 @@ const ItemInner = props => {
     }
   };
   useEffect(() => {
+    // console.log(CustomEase);
     const id = props.match.params.id;
     getItem(id);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id, props.history.location.pathname]);
-
+  useEffect(() => {
+    if (!pageLoader) {
+      tl.to(imageReveal, 1.2, {
+        width: "0%",
+        ease: Power3.easeInOut
+      })
+        .to(image, 1.4, { scale: 1, delay: -1.1, ease: Power3.easeInOut })
+        .to(descriptionWrapper, 0.7, {
+          opacity: 1,
+          ease: Power3.easeInOut,
+          delay: -0.9
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageLoader, props.location.pathname]);
   const updateImageHref = href => {
     setHref(href);
   };
@@ -41,21 +61,50 @@ const ItemInner = props => {
   };
   const { images, type, description, price, _id, title } = props.item;
   return (
-    <div className="inner-item">
+    <div className={`inner-item ${pageLoader ? "loading" : ""}`}>
       {pageLoader ? (
-        "Loading..."
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%,-50%)"
+          }}
+        >
+          {" "}
+          <Loader type="Circles" color="#3a68f1" height={150} width={150} />
+        </div>
       ) : (
         <>
           <div className="main-image">
             <div className="mainImage-box">
+              <div
+                className="animation-block"
+                ref={el => {
+                  imageReveal = el;
+                }}
+              ></div>
               {href ? (
                 <img src={href} alt="acer" />
               ) : (
-                images && <img src={images[0].image} alt="acer" />
+                images && (
+                  <img
+                    src={images[0].image}
+                    alt="acer"
+                    ref={el => {
+                      image = el;
+                    }}
+                  />
+                )
               )}
             </div>
           </div>
-          <div className="description-container">
+          <div
+            className="description-container"
+            ref={el => {
+              descriptionWrapper = el;
+            }}
+          >
             <div className="thumbnails">
               {images &&
                 images.map((image, index) => (
@@ -81,10 +130,9 @@ const ItemInner = props => {
                 {loader ? (
                   <Loader
                     type="Circles"
-                    color="#fff"
+                    color="#3a68f1"
                     height={35}
                     width={35}
-                    timeout={3000} //3 secs
                   />
                 ) : (
                   <div

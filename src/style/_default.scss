@@ -15,7 +15,57 @@ html {
   font-size: 62.5%;
 }
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: "halveticaNowDisplay", sans-serif;
   font-size: 1.7rem;
   //   font-family: 'Roboto Condensed', sans-serif;
+}
+.main-outer-wrapper {
+  opacity: 0;
+}
+// .fade {
+// }
+
+// .fade-enter {
+//   position: relative;
+//   &::after {
+//     content: "";
+//     position: fixed;
+//     display: block;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     height: 100%;
+//     background-color: #fff;
+//     z-index: 1000;
+//     opacity: 1;
+//     transition-duration: 1s;
+//     transition-delay: 0.5s;
+//   }
+// }
+
+// .fade-enter-active {
+//   opacity: 0;
+//   transition: all 0.5s;
+//   &::after {
+//     transition-duration: 1s;
+//     transition-delay: 0.5s;
+//     // height: 0px;
+//   }
+// }
+
+// .fade-exit {
+//   opacity: 0;
+// }
+
+// .fade-exit-active {
+//   opacity: 0;
+// }
+.animation {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f6f6f6;
+  z-index: 1;
 }

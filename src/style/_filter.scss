@@ -3,8 +3,16 @@
   .head {
     margin-bottom: 2rem;
     font-weight: bold;
+    cursor: pointer;
   }
   .filter-items {
+    transition: all 0.3s cubic-bezier(0.35, 0, 0.17, 1);
+    overflow: hidden;
+    max-height: 20rem;
+    padding: 0 0.5rem;
+    &.hide {
+      max-height: 0;
+    }
     .item {
       display: flex;
       align-items: center;
