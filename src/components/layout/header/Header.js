@@ -6,9 +6,8 @@ import { connect } from "react-redux";
 import { logOutUser } from "../../../redux/actions/authAction";
 import { restoreSearchedItems } from "../../../redux/actions/searchAction";
 import Search from "../../molecules/search";
-import DropdownItem from "../../molecules/dropdownMenu";
 import { getAllCategory } from "../../../redux/actions/categoryAction";
-
+import HeaderDopdown from "../../molecules/headerDropdown";
 const Header = props => {
   const [backPath, setBackPath] = useState("/");
   useEffect(() => {
@@ -29,38 +28,42 @@ const Header = props => {
     props.history.push("/");
   };
   return (
-    <div className="header flex-space">
-      <div className="main">
-        <div className="back-wrapper">
-          <Link to={backPath} className="flex-center">
-            <IoIosArrowRoundBack size="27" />
-            Back to Shop
-          </Link>
-        </div>
-        <DropdownItem title="Categories" items={props.categories} />
-      </div>
-      <div className="flex-space">
-        <div className="search-box">
-          <Search />
-        </div>
-        {props.auth.isAuthenticated ? (
-          <>
-            <div className="account">
-              <Link to="/cart" className="flex-center">
-                Cart
-                <FiShoppingCart size="17" style={{ marginLeft: "1rem" }} />
+    <div className="flex-center header-wrapper">
+      <div className="header">
+        <div className="flex-space header-inner-wrapper">
+          <div className="main">
+            <div className="back-wrapper">
+              <Link to={backPath} className="flex-center">
+                <IoIosArrowRoundBack size="27" />
+                Back to Shop
               </Link>
             </div>
-            <div className="account underline flex-center" onClick={logOut}>
-              Logout
-              <FiLogOut size="17" style={{ marginLeft: "1rem" }} />
-            </div>
-          </>
-        ) : (
-          <div className="account underline">
-            <Link to="/login">account</Link>
+            <HeaderDopdown />
           </div>
-        )}
+          <div className="flex-space right-side-wrapper">
+            <div className="search-box">
+              <Search />
+            </div>
+            {props.auth.isAuthenticated ? (
+              <>
+                <div className="account">
+                  <Link to="/cart" className="flex-center">
+                    Cart
+                    <FiShoppingCart size="17" style={{ marginLeft: "1rem" }} />
+                  </Link>
+                </div>
+                <div className="account underline flex-center" onClick={logOut}>
+                  Logout
+                  <FiLogOut size="17" style={{ marginLeft: "1rem" }} />
+                </div>
+              </>
+            ) : (
+              <div className="account underline">
+                <Link to="/login">account</Link>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ const Nav = props => {
     console.log(e.target.value);
   };
   return (
-    <div className="nav">
+    <div className="nav top-wrapper">
       <Filter
         onChange={onChange}
         className="price"

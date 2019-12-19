@@ -26,7 +26,7 @@ const Items = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.location.pathname]);
   return (
-    <div className="items-wrapper">
+    <div className="items-wrapper top-wrapper">
       <div className="grid">
         {props.items.map(data => {
           return <Item props={props} data={data} key={data._id} />;

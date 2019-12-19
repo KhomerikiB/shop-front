@@ -4,7 +4,7 @@ import { getItemById } from "../../../redux/actions/itemsAction";
 import { addItemToCart } from "../../../redux/actions/cartAction";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
-import { TimelineLite, Power3 } from "gsap";
+import { TimelineLite, Power3, Power2 } from "gsap";
 
 const ItemInner = props => {
   const [href, setHref] = useState("");
@@ -32,15 +32,21 @@ const ItemInner = props => {
   }, [props.match.params.id, props.history.location.pathname]);
   useEffect(() => {
     if (!pageLoader) {
-      tl.to(imageReveal, 1.2, {
-        width: "0%",
-        ease: Power3.easeInOut
+      tl.to(imageReveal, 0.5, {
+        opacity: 0,
+        ease: Power2.easeIn
       })
-        .to(image, 1.4, { scale: 1, delay: -1.1, ease: Power3.easeInOut })
+        .to(image, 0.8, {
+          scale: 1,
+          delay: -0.9,
+          opacity: 1,
+          ease: Power3.easeInOut
+        })
         .to(descriptionWrapper, 0.7, {
           opacity: 1,
-          ease: Power3.easeInOut,
-          delay: -0.9
+          x: 0,
+          ease: Power3.ease,
+          delay: -1
         });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -61,7 +67,7 @@ const ItemInner = props => {
   };
   const { images, type, description, price, _id, title } = props.item;
   return (
-    <div className={`inner-item ${pageLoader ? "loading" : ""}`}>
+    <div className={`inner-item top-wrapper ${pageLoader ? "loading" : ""}`}>
       {pageLoader ? (
         <div
           style={{
@@ -94,6 +100,7 @@ const ItemInner = props => {
                     ref={el => {
                       image = el;
                     }}
+                    style={{ opacity: 0 }}
                   />
                 )
               )}
