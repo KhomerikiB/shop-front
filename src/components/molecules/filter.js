@@ -11,7 +11,7 @@ const Filter = props => {
       </div>
       <ul className={`filter-items ${className} ${hide ? "hide" : ""}`}>
         {items.map(item => (
-          <label className="item">
+          <label className="item" key={item.value}>
             <Input
               type="radio"
               name={item.name}

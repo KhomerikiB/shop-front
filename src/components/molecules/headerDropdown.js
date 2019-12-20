@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { TimelineMax, Power2 } from "gsap";
-const HeaderDropdown = () => {
+import { Link } from "react-router-dom";
+const HeaderDropdown = props => {
   let dropdown = useRef(null);
   let bgWrapper = useRef(null);
   let headerItems = useRef(null);
@@ -13,7 +14,7 @@ const HeaderDropdown = () => {
           pointerEvents: "fill",
           ease: Power2.easeIn
         })
-        .to(dropdown, 0.8, {
+        .to(dropdown, 0.7, {
           maxHeight: "1000px",
           ease: Power2.easeIn,
           delay: -0.1
@@ -32,6 +33,10 @@ const HeaderDropdown = () => {
   const mouseLeave = () => {
     tl.reverse();
   };
+  const resetAnimation = () => {
+    tl.reverse();
+  };
+  const { title, categories } = props;
   return (
     <>
       <div
@@ -45,7 +50,7 @@ const HeaderDropdown = () => {
         onMouseEnter={mouseEnter}
         onMouseLeave={mouseLeave}
       >
-        <div className="category-item">Categories</div>
+        <div className="category-item">{title}</div>
         <div className="header-dropdown" ref={el => (dropdown = el)}>
           <div
             className="header-items-wrapper"
@@ -53,33 +58,23 @@ const HeaderDropdown = () => {
               headerItems = el;
             }}
           >
-            <div className="item">
-              <div className="image-wrapper">
-                <img
-                  src="https://www.etq-amsterdam.com/wp-content/uploads/2018/02/ETQ-Amsterdam-Low-1-White-fit-7-750x0-c-default.jpg"
-                  alt=""
-                />
-              </div>
-              <p className="item-link">agwera</p>
-            </div>
-            <div className="item">
-              <div className="image-wrapper">
-                <img
-                  src="https://www.etq-amsterdam.com/wp-content/uploads/2018/02/ETQ-Amsterdam-Low-1-White-fit-7-750x0-c-default.jpg"
-                  alt=""
-                />
-              </div>
-              <p className="item-link">agwera</p>
-            </div>
-            <div className="item">
-              <div className="image-wrapper">
-                <img
-                  src="https://www.etq-amsterdam.com/wp-content/uploads/2018/02/ETQ-Amsterdam-Low-1-White-fit-7-750x0-c-default.jpg"
-                  alt=""
-                />
-              </div>
-              <p className="item-link">agwera</p>
-            </div>
+            {categories &&
+              categories.map(category => (
+                <Link
+                  to={`/category/${category._id}`}
+                  className="item"
+                  onClick={resetAnimation}
+                  key={category._id}
+                >
+                  <div className="image-wrapper">
+                    <img
+                      src="https://www.etq-amsterdam.com/wp-content/uploads/2018/02/ETQ-Amsterdam-Low-1-White-fit-7-750x0-c-default.jpg"
+                      alt=""
+                    />
+                  </div>
+                  <p className="item-link">{category.name}</p>
+                </Link>
+              ))}
           </div>
         </div>
       </div>

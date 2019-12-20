@@ -20,8 +20,23 @@ class App extends React.Component {
     super(props);
     this.animation = React.createRef(null);
     this.mainWrapper = React.createRef(null);
+    this.state = {
+      scrolled: false
+    };
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      window.scrollTo(0, 0);
+    }
   }
   componentDidMount() {
+    window.onscroll = () => {
+      if (window.pageYOffset < 30) {
+        this.setState({ scrolled: false });
+      } else if (!this.state.scrolled) {
+        this.setState({ scrolled: true });
+      }
+    };
     this.isAuth();
     let tl = new TimelineLite();
     tl.to(this.animation.current, 1.7, {
@@ -48,7 +63,12 @@ class App extends React.Component {
         <div className="animation" ref={this.animation}></div>
         <div className="main-outer-wrapper " ref={this.mainWrapper}>
           <Route path={["/", "/category/:id"]} exact component={Nav} />
-          <Route path={"/"} component={Header} />
+          <Route
+            path={"/"}
+            render={props => (
+              <Header scrolled={this.state.scrolled} {...props} />
+            )}
+          />
           <Switch>
             <Route
               path={["/", "/category/:id"]}
@@ -62,7 +82,7 @@ class App extends React.Component {
             {/* <Route path="/" exact component={Items} /> */}
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
-            <Route path="/item/:id" component={ItemInner} />
+            <Route path="/item/:id/:categoryId" component={ItemInner} />
             <Route path="/cart" component={CartDetails} />
           </Switch>
         </div>

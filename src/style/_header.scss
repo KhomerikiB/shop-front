@@ -10,13 +10,18 @@
   pointer-events: none;
 }
 .header-wrapper {
-  margin-top: 2rem;
   .header {
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    &.active {
+      background-color: rgba(255, 255, 255, 0.98);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
     padding: 1rem 3rem;
     z-index: 10;
     position: fixed;
-    width: 95%;
-    margin-top: 2rem;
+    width: 97%;
+    top: 1rem;
     font-size: 0.9em;
     display: flex;
     align-items: center;

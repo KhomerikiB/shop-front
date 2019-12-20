@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { getItemById } from "../../../redux/actions/itemsAction";
+import { getSimilarItems } from "../../../redux/actions/similarItemsAction";
 import { addItemToCart } from "../../../redux/actions/cartAction";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import { TimelineLite, Power3, Power2 } from "gsap";
-
+import ItemsCarousel from "../../molecules/itemsCarousel";
 const ItemInner = props => {
   const [href, setHref] = useState("");
   const [loader, setLoading] = useState(false);
@@ -14,20 +15,20 @@ const ItemInner = props => {
   let image = useRef(null);
   let descriptionWrapper = useRef(null);
   let tl = new TimelineLite();
-  const getItem = async id => {
+  const getItem = async (id, categoryId) => {
     try {
       setPageLoader(true);
       await props.getItemById(id);
-      // setHref(props.item.images[0].image);
+      await props.getSimilarItems({ itemId: id, categoryId: categoryId });
       setPageLoader(false);
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    // console.log(CustomEase);
     const id = props.match.params.id;
-    getItem(id);
+    const categoryId = props.match.params.categoryId;
+    getItem(id, categoryId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id, props.history.location.pathname]);
   useEffect(() => {
@@ -67,93 +68,100 @@ const ItemInner = props => {
   };
   const { images, type, description, price, _id, title } = props.item;
   return (
-    <div className={`inner-item top-wrapper ${pageLoader ? "loading" : ""}`}>
-      {pageLoader ? (
-        <div
-          style={{
-            position: "absolute",
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%,-50%)"
-          }}
-        >
-          {" "}
-          <Loader type="Circles" color="#3a68f1" height={150} width={150} />
-        </div>
-      ) : (
-        <>
-          <div className="main-image">
-            <div className="mainImage-box">
-              <div
-                className="animation-block"
-                ref={el => {
-                  imageReveal = el;
-                }}
-              ></div>
-              {href ? (
-                <img src={href} alt="acer" />
-              ) : (
-                images && (
-                  <img
-                    src={images[0].image}
-                    alt="acer"
-                    ref={el => {
-                      image = el;
-                    }}
-                    style={{ opacity: 0 }}
-                  />
-                )
-              )}
-            </div>
-          </div>
+    <div className={`inner-item-outer ${pageLoader ? "loading" : ""}`}>
+      <div className="inner-item top-wrapper">
+        {pageLoader ? (
           <div
-            className="description-container"
-            ref={el => {
-              descriptionWrapper = el;
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%,-50%)"
             }}
           >
-            <div className="thumbnails">
-              {images &&
-                images.map((image, index) => (
-                  <div
-                    key={index}
-                    className="item"
-                    onClick={() => updateImageHref(image.image)}
-                  >
-                    <img src={image.image} alt="acer" />
-                  </div>
-                ))}
-            </div>
-            <div className="description-wrapper">
-              <div className="price">{price}$</div>
-              <p className="title">{title}</p>
-              <div className="brand-type">
-                {/* <span className="brand">{brand} _ </span> */}
-                <span className="type">{type}</span>
-              </div>
-
-              <p className="desription">{description}</p>
-              <button className="button">
-                {loader ? (
-                  <Loader
-                    type="Circles"
-                    color="#3a68f1"
-                    height={35}
-                    width={35}
-                  />
-                ) : (
-                  <div
-                    className="flex-center"
-                    style={{ height: "100%" }}
-                    onClick={() => addItemToCart(_id)}
-                  >
-                    Add To Cart
-                  </div>
-                )}
-              </button>
-            </div>
+            {" "}
+            <Loader type="Circles" color="#3a68f1" height={150} width={150} />
           </div>
-        </>
+        ) : (
+          <>
+            <div className="main-image">
+              <div className="mainImage-box">
+                <div
+                  className="animation-block"
+                  ref={el => {
+                    imageReveal = el;
+                  }}
+                ></div>
+                {href ? (
+                  <img src={href} alt="acer" />
+                ) : (
+                  images && (
+                    <img
+                      src={images[0].image}
+                      alt="acer"
+                      ref={el => {
+                        image = el;
+                      }}
+                      style={{ opacity: 0 }}
+                    />
+                  )
+                )}
+              </div>
+            </div>
+            <div
+              className="description-container"
+              ref={el => {
+                descriptionWrapper = el;
+              }}
+            >
+              <div className="thumbnails">
+                {images &&
+                  images.map((image, index) => (
+                    <div
+                      key={index}
+                      className="item"
+                      onClick={() => updateImageHref(image.image)}
+                    >
+                      <img src={image.image} alt="acer" />
+                    </div>
+                  ))}
+              </div>
+              <div className="description-wrapper">
+                <div className="price">{price}$</div>
+                <p className="title">{title}</p>
+                <div className="brand-type">
+                  {/* <span className="brand">{brand} _ </span> */}
+                  <span className="type">{type}</span>
+                </div>
+
+                <p className="desription">{description}</p>
+                <button className="button">
+                  {loader ? (
+                    <Loader
+                      type="Circles"
+                      color="#3a68f1"
+                      height={35}
+                      width={35}
+                    />
+                  ) : (
+                    <div
+                      className="flex-center"
+                      style={{ height: "100%" }}
+                      onClick={() => addItemToCart(_id)}
+                    >
+                      Add To Cart
+                    </div>
+                  )}
+                </button>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+      {props.getSimilarItems.length > 0 && (
+        <div className="container">
+          <ItemsCarousel items={props.similarItems} />
+        </div>
       )}
     </div>
   );
@@ -161,9 +169,12 @@ const ItemInner = props => {
 
 const mapStateToProps = state => {
   return {
-    item: state.items.item
+    item: state.items.item,
+    similarItems: state.similarItems.items
   };
 };
-export default connect(mapStateToProps, { getItemById, addItemToCart })(
-  ItemInner
-);
+export default connect(mapStateToProps, {
+  getItemById,
+  addItemToCart,
+  getSimilarItems
+})(ItemInner);

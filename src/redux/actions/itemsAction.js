@@ -27,10 +27,10 @@ export const getItemById = id => {
     }
   };
 };
-export const getItemsByCategory = id => {
+export const getItemsByCategory = slug => {
   return async dispatch => {
     try {
-      const result = await apiCalls.getItemsByCategory(id);
+      const result = await apiCalls.getItemsByCategory(slug);
       dispatch({
         type: types.GET_ITEMS_BY_CATEGORY,
         payload: result.data.data

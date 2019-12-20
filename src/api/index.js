@@ -46,8 +46,13 @@ export const removeItemFromCart = id => {
 export const getCategoryItems = () => {
   return axios.get(`${categoryBaseURL}`);
 };
-export const getItemsByCategory = id => {
-  return axios.get(`${itemsBaseURL}/categoryId/${id}`);
+export const getItemsByCategory = slug => {
+  return axios.get(`${itemsBaseURL}/category/id?id=${slug}`);
+};
+export const getSimilarItems = data => {
+  return axios.get(
+    `${itemsBaseURL}/category/id?id=${data.categoryId}&itemId=${data.itemId}`
+  );
 };
 export const registerUser = data => {
   return axios.post(`${baseAuthURL}/register`, data);

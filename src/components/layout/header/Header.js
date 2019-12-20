@@ -19,6 +19,7 @@ const Header = props => {
     if (typeof props.location.state !== "undefined") {
       setBackPath(props.location.state.history.path);
     } else {
+      console.log(props.location);
       setBackPath("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -29,7 +30,7 @@ const Header = props => {
   };
   return (
     <div className="flex-center header-wrapper">
-      <div className="header">
+      <div className={`header ${props.scrolled ? "active" : ""}`}>
         <div className="flex-space header-inner-wrapper">
           <div className="main">
             <div className="back-wrapper">
@@ -38,7 +39,7 @@ const Header = props => {
                 Back to Shop
               </Link>
             </div>
-            <HeaderDopdown />
+            <HeaderDopdown title="Categories" categories={props.categories} />
           </div>
           <div className="flex-space right-side-wrapper">
             <div className="search-box">

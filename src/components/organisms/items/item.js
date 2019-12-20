@@ -4,9 +4,8 @@ import { addItemToCart } from "../../../redux/actions/cartAction";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 const Item = props => {
   const getDetailInfo = id => {
-    // props.props.history.push(`/item/${id}`);
     props.props.history.push({
-      pathname: `/item/${id}`,
+      pathname: `/item/${id}/${props.data.category}`,
       state: {
         history: { path: props.props.location.pathname }
       }
